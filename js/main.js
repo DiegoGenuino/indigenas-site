@@ -595,97 +595,30 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// --- Audio Manager ---
-const audioFiles = {
-    'chapter-origin': 'assets/audio/origin.mp3',
-    'chapter-connection': 'assets/audio/connection.mp3',
-    'chapter-territory': 'assets/audio/territory.mp3',
-    'chapter-artifacts': 'assets/audio/artifacts.mp3',
-    'chapter-resistance': 'assets/audio/resistance.mp3',
-    'chapter-fire': 'assets/audio/fire.mp3',
-    'knowledge-stack': 'assets/audio/knowledge.mp3',
-    'chapter-cosmology': 'assets/audio/cosmology.mp3',
-    'chapter-heroes': 'assets/audio/heroes.mp3',
-    'chapter-celebration': 'assets/audio/celebration.mp3',
-    'chapter-future': 'assets/audio/future.mp3'
-};
+// --- Audio Manager (Single Track) ---
+const bgAudio = document.getElementById('bg-audio');
+bgAudio.volume = 0;
 
-let currentAudio = null;
 let isMuted = true;
 const soundBtn = document.getElementById('sound-toggle');
 const soundIcon = soundBtn.querySelector('.sound-icon');
-
-// Preload Audio (Optional: lazy load is better for many files)
-const audioElements = {};
-
-Object.keys(audioFiles).forEach(key => {
-    const audio = new Audio(audioFiles[key]);
-    audio.loop = true;
-    audio.volume = 0;
-    audioElements[key] = audio;
-});
 
 function toggleSound() {
     isMuted = !isMuted;
     if (isMuted) {
         soundIcon.textContent = "OFF";
         soundBtn.classList.remove('playing');
-        if (currentAudio) fadeOut(currentAudio);
+        gsap.to(bgAudio, { volume: 0, duration: 1, onComplete: () => bgAudio.pause() });
     } else {
         soundIcon.textContent = "ON";
         soundBtn.classList.add('playing');
-        // Find current section and play
-        const currentSection = getCurrentSection();
-        if (currentSection && audioElements[currentSection]) {
-            playAudio(currentSection);
-        }
+        bgAudio.play().then(() => {
+            gsap.to(bgAudio, { volume: 0.5, duration: 1 });
+        }).catch(e => console.error("Audio play failed:", e));
     }
 }
 
 soundBtn.addEventListener('click', toggleSound);
-
-function fadeOut(audio) {
-    gsap.to(audio, { volume: 0, duration: 1, onComplete: () => audio.pause() });
-}
-
-function fadeIn(audio) {
-    audio.play().catch(e => console.log("Audio play failed (interaction needed):", e));
-    gsap.to(audio, { volume: 0.5, duration: 1 });
-}
-
-function playAudio(sectionId) {
-    if (isMuted) return;
-    
-    const newAudio = audioElements[sectionId];
-    if (!newAudio) return;
-
-    if (currentAudio && currentAudio !== newAudio) {
-        fadeOut(currentAudio);
-    }
-
-    if (currentAudio !== newAudio) {
-        currentAudio = newAudio;
-        fadeIn(currentAudio);
-    }
-}
-
-function getCurrentSection() {
-    // Simple check based on scroll position or active class
-    // We can rely on ScrollTrigger callbacks instead
-    return null; 
-}
-
-// Update ScrollTriggers to handle audio
-chapters.forEach((id) => {
-    const sectionId = id.replace('#', '');
-    ScrollTrigger.create({
-        trigger: id,
-        start: "top center",
-        end: "bottom center",
-        onEnter: () => playAudio(sectionId),
-        onEnterBack: () => playAudio(sectionId)
-    });
-});
 
 // --- Timeline Navigation Logic ---
 const timelineItems = document.querySelectorAll('.timeline-item');
@@ -737,4 +670,25 @@ heroCards.forEach(card => {
             gsap.to(card, { filter: "grayscale(100%) brightness(0.7)", duration: 0.3 });
         }
     });
+});
+
+// --- Preloader Logic ---
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Ensure we start at the top
+        window.scrollTo(0, 0);
+        
+        // Fade out preloader
+        gsap.to(preloader, {
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            onComplete: () => {
+                preloader.style.visibility = 'hidden';
+                // Refresh ScrollTrigger to ensure positions are correct after load
+                ScrollTrigger.refresh();
+            }
+        });
+    }
 });
