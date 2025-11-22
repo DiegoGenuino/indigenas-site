@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ecos Ancestrais - Uma jornada imersiva pela cultura, história e resistência dos povos indígenas do Brasil.">
+    <meta name="keywords" content="indígenas, brasil, cultura, história, resistência, amazônia, arte, cosmologia">
+    <meta name="author" content="Ecos Ancestrais">
+    <meta property="og:title" content="Ecos Ancestrais - Uma Jornada Indígena">
+    <meta property="og:description" content="Explore a sabedoria, a arte e a luta dos povos originários em uma experiência web imersiva.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+    
     <title>Ecos Ancestrais - Uma Jornada Indígena</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +31,14 @@
     </script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Carregando Ancestralidade...</div>
+        </div>
+    </div>
+
     <canvas id="bg-canvas"></canvas>
 
     <!-- Custom Cursor -->
@@ -165,21 +182,53 @@
         <!-- Knowledge Stack (Kept as an interlude) -->
         <section class="knowledge-section" id="knowledge-stack">
             <div class="knowledge-container">
-                <div class="knowledge-card" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;">
-                    <h2>Medicina da Floresta</h2>
-                    <p>A farmácia viva. Cada folha guarda um segredo, cada raiz uma cura.</p>
+                <div class="knowledge-card" style="background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-number">01</div>
+                        <h2>Medicina da Floresta</h2>
+                        <p>A farmácia viva. Cada folha guarda um segredo, cada raiz uma cura.</p>
+                        <div class="card-action">
+                            <span>Explorar</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="knowledge-card" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1534531173927-aeb928d54385?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;">
-                    <h2>Línguas Vivas</h2>
-                    <p>Mais de 270 línguas. Cada palavra é um universo.</p>
+                <div class="knowledge-card" style="background-image: url('https://images.unsplash.com/photo-1534531173927-aeb928d54385?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-number">02</div>
+                        <h2>Línguas Vivas</h2>
+                        <p>Mais de 270 línguas. Cada palavra é um universo.</p>
+                        <div class="card-action">
+                            <span>Explorar</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="knowledge-card" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;">
-                    <h2>Arte e Grafismo</h2>
-                    <p>A pele como tela. Códigos de identidade e proteção.</p>
+                <div class="knowledge-card" style="background-image: url('https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-number">03</div>
+                        <h2>Arte e Grafismo</h2>
+                        <p>A pele como tela. Códigos de identidade e proteção.</p>
+                        <div class="card-action">
+                            <span>Explorar</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="knowledge-card" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;">
-                    <h2>Cosmologia</h2>
-                    <p>O céu é um mapa. As estrelas são nossos ancestrais.</p>
+                <div class="knowledge-card" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-number">04</div>
+                        <h2>Cosmologia</h2>
+                        <p>O céu é um mapa. As estrelas são nossos ancestrais.</p>
+                        <div class="card-action">
+                            <span>Explorar</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -289,6 +338,10 @@
         <span class="sound-icon">OFF</span>
         <span class="sound-text">SOM</span>
     </button>
+
+    <audio id="bg-audio" loop>
+        <source src="assets/audio/connection.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Indigenous Timeline Navigation -->
     <nav class="timeline-nav">
